@@ -7,3 +7,30 @@
 //
 
 import Foundation
+
+
+class RedditModel {
+    
+    let title:String
+    let author:String
+    //let created:Date
+   // let thumbnailUrl:String?
+  //  let numberOfComments:Int
+ //   let unreadStatus:Bool
+    
+    
+    init?(data:Dictionary<String, Any>) {
+        print("creo modelo")
+        print(data)
+        guard let title = data["title"] as? String else {
+            return nil
+        }
+        self.title = title
+        
+        guard let author = data["author"] as? String else {
+            return nil
+        }
+        self.author = author
+    }
+    
+}
