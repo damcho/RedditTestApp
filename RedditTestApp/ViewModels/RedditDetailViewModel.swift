@@ -7,3 +7,16 @@
 //
 
 import Foundation
+
+class RedditDetailViewModel {
+    
+    var redditModel:RedditModel?
+    
+    var title:String
+    
+    init(redditModel:RedditModel) {
+        self.redditModel = redditModel
+        self.title = redditModel.title
+    }
+    
+}

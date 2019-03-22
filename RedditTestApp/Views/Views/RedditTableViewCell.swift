@@ -16,7 +16,12 @@ class RedditTableViewCell: UITableViewCell {
     @IBOutlet weak var redditAuthorNameLabel: UILabel!
     @IBOutlet weak var redditTitleLabel: UILabel!
     
-    var viewModel:RedditCellViewModel?
+    var viewModel:RedditCellViewModel? {
+        didSet {
+            redditTitleLabel.text = viewModel?.title
+            redditAuthorNameLabel.text = viewModel?.author
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

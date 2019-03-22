@@ -22,8 +22,7 @@ class RedditsContainer {
         for redditDictionary in dataArray {
             if let redditData = redditDictionary["data"] as? Dictionary<String, Any> {
                 if let redditModel = RedditModel(data:redditData ) {
-                    let redditCellViewModel = RedditCellViewModel()
-                    redditCellViewModel.redditModel = redditModel
+                    let redditCellViewModel = RedditCellViewModel(redditModel: redditModel)
                     redditCellViewModelsArray.append(redditCellViewModel)
                     self.redditsArray = redditCellViewModelsArray
                 }

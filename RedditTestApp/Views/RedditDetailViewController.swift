@@ -10,31 +10,26 @@ import UIKit
 
 class RedditDetailViewController: UIViewController {
 
-    @IBOutlet weak var detailDescriptionLabel: UILabel!
-
-
-    func configureView() {
-        // Update the user interface for the detail item.
-        if let detail = detailItem {
-            if let label = detailDescriptionLabel {
-                label.text = detail.description
+    @IBOutlet weak var redditAuthorLabel: UILabel!
+    @IBOutlet weak var redditThumbImageView: UIImageView!
+    @IBOutlet weak var redditTitleLabel: UILabel!
+    var viewModel:RedditDetailViewModel? {
+        didSet {
+            if redditTitleLabel != nil {
+                redditTitleLabel.text = viewModel?.title
             }
         }
     }
+    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        configureView()
-    }
+        redditTitleLabel.text = viewModel?.title
 
-    var detailItem: NSDate? {
-        didSet {
-            // Update the view.
-            configureView()
-        }
     }
 
 
+   
 }
 

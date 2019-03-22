@@ -13,7 +13,6 @@ class RedditListViewController: UITableViewController {
     var detailViewController: RedditDetailViewController? = nil
     let viewModel = RedditListViewModel()
 
-    @IBOutlet var redditListTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,13 +22,14 @@ class RedditListViewController: UITableViewController {
         if let split = splitViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? RedditDetailViewController
+            detailViewController?.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+            detailViewController?.navigationItem.leftItemsSupplementBackButton = true
         }
     }
     
     func setupViewModel() {
         let completionSuccess = { (reddits:RedditsContainer? ) -> () in
-     //       print(reddits)
-            self.redditListTableView.reloadData()
+            self.tableView.reloadData()
         }
         
         viewModel.redditsFetchedWithSuccess = completionSuccess
@@ -42,19 +42,6 @@ class RedditListViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
-    }
-
-
-    // MARK: - Segues
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let controller = (segue.destination as! UINavigationController).topViewController as! RedditDetailViewController
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
-            }
-        }
     }
 
     // MARK: - Table View
@@ -73,6 +60,21 @@ class RedditListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if self.detailViewController != nil {
+            guard let celLViewModel = self.viewModel.getRedditCellViewModelAt(index: indexPath.row) else {
+                return
+            }
+
+            detailViewController?.viewModel = RedditDetailViewModel(redditModel:celLViewModel.redditModel!)
+            let detailNavigationController = detailViewController?.navigationController
+
+            splitViewController?.showDetailViewController(detailNavigationController!, sender: nil)
+        }
+
+        
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

@@ -12,5 +12,12 @@ class RedditCellViewModel {
     
     var redditModel:RedditModel?
     
+    var title:String
+    var author:String
     
+    init(redditModel:RedditModel) {
+        self.redditModel = redditModel
+        self.title = redditModel.title
+        self.author = redditModel.author
+    }
 }
