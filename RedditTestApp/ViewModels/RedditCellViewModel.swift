@@ -7,17 +7,36 @@
 //
 
 import Foundation
-
+import UIKit
 class RedditCellViewModel {
     
     var redditModel:RedditModel?
     
     var title:String
     var author:String
+    var redditImage:UIImage
+    var comments:String
+    var readState:Bool
     
     init(redditModel:RedditModel) {
         self.redditModel = redditModel
         self.title = redditModel.title
         self.author = redditModel.author
+        self.redditImage = UIImage(named: "defaultRedditImage")!
+        self.comments = "\(redditModel.numberOfComments) comments"
+        self.readState = false
+    }
+    
+    func getImage(handler: @escaping (UIImage) -> ()) -> UIImage {
+        guard let imageUrl =  self.redditModel?.thumbnailUrl else {
+            return self.redditImage
+        }
+        let imageHandler = {(image:UIImage?) -> () in
+            if image != nil {
+                handler(image!)
+            }
+        }
+        UIImage.downloaded(from: imageUrl, completionHandler: imageHandler)
+        return self.redditImage
     }
 }

@@ -13,15 +13,14 @@ class RedditModel {
     
     let title:String
     let author:String
-    //let created:Date
-   // let thumbnailUrl:String?
-  //  let numberOfComments:Int
+    let dateCreated:Date
+    let thumbnailUrl:URL?
+    let numberOfComments:Int
  //   let unreadStatus:Bool
     
     
     init?(data:Dictionary<String, Any>) {
         print("creo modelo")
-        print(data)
         guard let title = data["title"] as? String else {
             return nil
         }
@@ -31,6 +30,23 @@ class RedditModel {
             return nil
         }
         self.author = author
+        
+        guard let thumbnailUrl = data["thumbnail"] as? String else {
+            return nil
+        }
+        self.thumbnailUrl = URL(string: thumbnailUrl)
+
+        guard let numberOfComments = data["num_comments"] as? Int else {
+            return nil
+        }
+        self.numberOfComments = numberOfComments
+        
+        guard let dateCreated = data["created"] as? Int else {
+            return nil
+        }
+        self.dateCreated = Date(timeIntervalSince1970: Double(dateCreated))
+        print(self.dateCreated)
+        
     }
     
 }
