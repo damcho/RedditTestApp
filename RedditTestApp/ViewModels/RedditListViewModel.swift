@@ -7,3 +7,45 @@
 //
 
 import Foundation
+
+class RedditListViewModel {
+    
+    
+    var redditsFetchedWithSuccess: ((RedditsContainer) -> ())?
+    var redditsFetchedWithFailed: ((RedditApiError) -> ())?
+    let apiConnector = RedditApiConnector.shared
+    var redditsContainer:RedditsContainer?
+    
+    func getRedditCellViewModelAt(index:Int) -> RedditCellViewModel? {
+        return self.redditsContainer != nil ? self.redditsContainer!.getRedditAt(index:index) : nil
+    }
+    
+    func getReddits() -> [RedditCellViewModel]{
+        return self.redditsContainer != nil ? self.redditsContainer!.redditsArray : []
+    }
+    
+    func redditsCount() -> Int {
+        return self.redditsContainer?.redditsArray != nil ? self.redditsContainer!.redditsArray.count : 0
+    }
+    
+    func getTopReddits(queryObj:RedditQueryObject) {
+        
+        let completionHandler = {[unowned self] (redditsContainer:RedditsContainer?, error:RedditApiError?) -> () in
+            if redditsContainer != nil {
+               
+                self.redditsContainer = redditsContainer
+                self.redditsFetchedWithSuccess?(redditsContainer!)
+            } else {
+                switch error! {
+                case .MALFORMED_DATA:
+                    self.redditsFetchedWithFailed?(error!)
+                default:
+                    return
+                }
+            }
+        }
+        
+        apiConnector.fetchReddits(queryObject: queryObj, completionHandler: completionHandler)
+    }
+    
+}

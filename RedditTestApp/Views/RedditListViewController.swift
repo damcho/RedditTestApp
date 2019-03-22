@@ -11,17 +11,32 @@ import UIKit
 class RedditListViewController: UITableViewController {
 
     var detailViewController: RedditDetailViewController? = nil
+    let viewModel = RedditListViewModel()
 
-
+    @IBOutlet var redditListTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        navigationItem.leftBarButtonItem = editButtonItem
+        
+        self.setupViewModel()
+        viewModel.getTopReddits(queryObj: RedditQueryObject())
 
         if let split = splitViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? RedditDetailViewController
         }
+    }
+    
+    func setupViewModel() {
+        let completionSuccess = { (reddits:RedditsContainer? ) -> () in
+     //       print(reddits)
+            self.redditListTableView.reloadData()
+        }
+        
+        viewModel.redditsFetchedWithSuccess = completionSuccess
+        let completionFailure = { ( error:RedditApiError? ) -> () in
+            print(error?.localizedDescription)
+        }
+        viewModel.redditsFetchedWithFailed = completionFailure
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -44,18 +59,15 @@ class RedditListViewController: UITableViewController {
 
     // MARK: - Table View
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return self.viewModel.redditsCount()
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-
-        return cell
+        let redditCell = tableView.dequeueReusableCell(withIdentifier: "redditcell", for: indexPath) as! RedditTableViewCell
+        redditCell.viewModel = self.viewModel.getRedditCellViewModelAt(index: indexPath.row)
+        return redditCell
     }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

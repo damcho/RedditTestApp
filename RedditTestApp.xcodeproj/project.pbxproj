@@ -19,6 +19,9 @@
 		8B807E0F2243B6E7001C1A16 /* RedditApiConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B807E0E2243B6E7001C1A16 /* RedditApiConnector.swift */; };
 		8B807E112243B72C001C1A16 /* RedditModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B807E102243B72C001C1A16 /* RedditModel.swift */; };
 		8B807E132243B74B001C1A16 /* RedditQueryObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B807E122243B74B001C1A16 /* RedditQueryObject.swift */; };
+		8BBF062E2243EED000B44C8D /* RedditsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF062D2243EED000B44C8D /* RedditsContainer.swift */; };
+		8BBF06312244F5D500B44C8D /* RedditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF06302244F5D500B44C8D /* RedditTableViewCell.swift */; };
+		8BBF06332244FA7B00B44C8D /* RedditCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF06322244FA7B00B44C8D /* RedditCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,9 @@
 		8B807E0E2243B6E7001C1A16 /* RedditApiConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditApiConnector.swift; sourceTree = "<group>"; };
 		8B807E102243B72C001C1A16 /* RedditModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditModel.swift; sourceTree = "<group>"; };
 		8B807E122243B74B001C1A16 /* RedditQueryObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditQueryObject.swift; sourceTree = "<group>"; };
+		8BBF062D2243EED000B44C8D /* RedditsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditsContainer.swift; sourceTree = "<group>"; };
+		8BBF06302244F5D500B44C8D /* RedditTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditTableViewCell.swift; sourceTree = "<group>"; };
+		8BBF06322244FA7B00B44C8D /* RedditCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +122,7 @@
 			children = (
 				8B807E102243B72C001C1A16 /* RedditModel.swift */,
 				8B807E122243B74B001C1A16 /* RedditQueryObject.swift */,
+				8BBF062D2243EED000B44C8D /* RedditsContainer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -133,6 +140,7 @@
 			children = (
 				8B807E0A2243B6AD001C1A16 /* RedditListViewModel.swift */,
 				8B807E0C2243B6CE001C1A16 /* RedditDetailViewModel.swift */,
+				8BBF06322244FA7B00B44C8D /* RedditCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -140,8 +148,17 @@
 		8B807E052243B579001C1A16 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8BBF062F2244F59500B44C8D /* Views */,
 				8B807E062243B606001C1A16 /* RedditDetailViewController.swift */,
 				8B807E072243B606001C1A16 /* RedditListViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8BBF062F2244F59500B44C8D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8BBF06302244F5D500B44C8D /* RedditTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -250,9 +267,12 @@
 				8B807E0F2243B6E7001C1A16 /* RedditApiConnector.swift in Sources */,
 				8B807E0B2243B6AD001C1A16 /* RedditListViewModel.swift in Sources */,
 				8B807E0D2243B6CE001C1A16 /* RedditDetailViewModel.swift in Sources */,
+				8BBF06312244F5D500B44C8D /* RedditTableViewCell.swift in Sources */,
 				8B807E132243B74B001C1A16 /* RedditQueryObject.swift in Sources */,
 				8B807DE12242B86C001C1A16 /* AppDelegate.swift in Sources */,
 				8B807E112243B72C001C1A16 /* RedditModel.swift in Sources */,
+				8BBF06332244FA7B00B44C8D /* RedditCellViewModel.swift in Sources */,
+				8BBF062E2243EED000B44C8D /* RedditsContainer.swift in Sources */,
 				8B807E082243B606001C1A16 /* RedditDetailViewController.swift in Sources */,
 				8B807E092243B606001C1A16 /* RedditListViewController.swift in Sources */,
 			);
