@@ -11,17 +11,22 @@ Viewmodels for each view controller
 Views folder:
 Contains view controllers and views
 
-Models:
+Models folder:
 Contains all model objects
+ReddistContainer: contains list of RedditModel
+RedditModel: reddit post model
+RedditQueryObject: model for API Uri creation
 
 
 supports iPhone and iPad
 
 things to improve or implement:
-- error handling
-- UI in general( activity indicator, animations )
+- Router for handling app navigation
+- API error handling
+- UI in general( activity indicator, animations, alerts )
 - app state preservation / restoration
 - save pictures to gallery
+- Memory leak in RedditsContainer
 
 How to install:
 -clone or download
