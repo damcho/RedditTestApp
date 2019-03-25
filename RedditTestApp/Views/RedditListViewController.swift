@@ -8,12 +8,13 @@
 
 import UIKit
 
-class RedditListViewController: UITableViewController {
+class RedditListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var detailViewController: RedditDetailViewController? = nil
     let viewModel = RedditListViewModel()
     var queryObj = RedditQueryObject()
     
+    @IBOutlet weak var redditsTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
@@ -22,8 +23,8 @@ class RedditListViewController: UITableViewController {
     }
     
     func setupView() {
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl?.addTarget(self, action: #selector(refreshReddits), for: .valueChanged)
+        self.redditsTableView.refreshControl = UIRefreshControl()
+        self.redditsTableView.refreshControl?.addTarget(self, action: #selector(refreshReddits), for: .valueChanged)
         
         if let split = splitViewController {
             let controllers = split.viewControllers
@@ -33,6 +34,10 @@ class RedditListViewController: UITableViewController {
         }
     }
     
+    @IBAction func dismissAllButtonTapped(_ sender: Any) {
+        self.viewModel.removeAllReddits()
+    }
+    
     @objc
     func refreshReddits() {
         self.queryObj.after = nil
@@ -40,9 +45,9 @@ class RedditListViewController: UITableViewController {
     }
     
     func setupViewModel() {
-        viewModel.redditsFetchedWithSuccess = { (reddits:RedditsContainer? ) -> () in
-                self.tableView.reloadData()
-                self.refreshControl?.endRefreshing()
+        viewModel.redditsFetchedWithSuccess = { () -> () in
+                self.redditsTableView.reloadData()
+                self.redditsTableView.refreshControl?.endRefreshing()
         }
 
         viewModel.redditsFetchedWithFailed = { ( error:RedditApiError ) -> () in
@@ -51,35 +56,29 @@ class RedditListViewController: UITableViewController {
         }
         
         viewModel.redditRemovedAtIndex = {(index) -> () in
-            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+            self.redditsTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
         }
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
-        self.tableView.reloadData()
+        self.redditsTableView.reloadData()
         super.viewWillAppear(animated)
     }
 
     // MARK: - Table View
 
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.viewModel.redditsCount()
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let redditCell = tableView.dequeueReusableCell(withIdentifier: "redditcell", for: indexPath) as! RedditTableViewCell
         redditCell.viewModel = self.viewModel.getRedditCellViewModelAt(index: indexPath.row)
         return redditCell
     }
-
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.detailViewController != nil {
             guard let celLViewModel = self.viewModel.getRedditCellViewModelAt(index: indexPath.row) else {
                 return
@@ -91,15 +90,6 @@ class RedditListViewController: UITableViewController {
             splitViewController?.showDetailViewController(detailNavigationController!, sender: nil)
         }
     }
-
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-        }
-    }
-
 
 }
 

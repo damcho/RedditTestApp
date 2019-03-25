@@ -11,7 +11,7 @@ import Foundation
 class RedditListViewModel {
     
     
-    var redditsFetchedWithSuccess: ((RedditsContainer) -> ())?
+    var redditsFetchedWithSuccess: (() -> ())?
     var redditsFetchedWithFailed: ((RedditApiError) -> ())?
     var redditRemovedAtIndex:((Int) -> ())?
     let apiConnector = RedditApiConnector.shared
@@ -38,7 +38,7 @@ class RedditListViewModel {
                 self.redditsContainer?.redditremovedAction = {(index) ->() in
                     self.redditRemovedAtIndex?(index)
                 }
-                self.redditsFetchedWithSuccess?(redditsContainer!)
+                self.redditsFetchedWithSuccess?()
             } else {
                 switch error! {
                 case .MALFORMED_DATA:
@@ -50,6 +50,11 @@ class RedditListViewModel {
         }
         
         apiConnector.fetchReddits(queryObject: queryObj, completionHandler: completionHandler)
+    }
+    
+    func removeAllReddits() {
+        self.redditsContainer?.redditsArray = []
+        self.redditsFetchedWithSuccess?()
     }
     
 }
