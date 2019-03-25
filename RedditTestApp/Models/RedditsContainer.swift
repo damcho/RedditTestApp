@@ -12,17 +12,25 @@ class RedditsContainer {
     
     var redditsArray:[RedditCellViewModel] = []
     var after:String?
+    var redditremovedAction:((Int) -> ())?
     
     init?(data:Array<Dictionary<String, Any>>) {
-        self.createRedditModels(dataArray: data)
+        self.createRedditCellModels(dataArray: data)
     }
     
-    func createRedditModels(dataArray:Array<Dictionary<String, Any>>){
+    func createRedditCellModels(dataArray:Array<Dictionary<String, Any>>){
         var redditCellViewModelsArray: [RedditCellViewModel] = []
         for redditDictionary in dataArray {
             if let redditData = redditDictionary["data"] as? Dictionary<String, Any> {
                 if let redditModel = RedditModel(data:redditData ) {
                     let redditCellViewModel = RedditCellViewModel(redditModel: redditModel)
+                    redditCellViewModel.dismissCellAction = {(redditCellViewModel) -> () in
+                        let index = self.redditsArray.firstIndex(where: {$0 === redditCellViewModel})
+
+                        self.redditsArray.remove(at: index!)
+
+                        self.redditremovedAction?(index!)
+                    }
                     redditCellViewModelsArray.append(redditCellViewModel)
                     self.redditsArray = redditCellViewModelsArray
                 }

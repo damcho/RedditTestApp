@@ -13,6 +13,7 @@ class RedditListViewModel {
     
     var redditsFetchedWithSuccess: ((RedditsContainer) -> ())?
     var redditsFetchedWithFailed: ((RedditApiError) -> ())?
+    var redditRemovedAtIndex:((Int) -> ())?
     let apiConnector = RedditApiConnector.shared
     var redditsContainer:RedditsContainer?
     
@@ -32,8 +33,11 @@ class RedditListViewModel {
         
         let completionHandler = {[unowned self] (redditsContainer:RedditsContainer?, error:RedditApiError?) -> () in
             if redditsContainer != nil {
-               
                 self.redditsContainer = redditsContainer
+
+                self.redditsContainer?.redditremovedAction = {(index) ->() in
+                    self.redditRemovedAtIndex?(index)
+                }
                 self.redditsFetchedWithSuccess?(redditsContainer!)
             } else {
                 switch error! {

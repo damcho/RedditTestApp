@@ -23,6 +23,7 @@
 		8BBF06312244F5D500B44C8D /* RedditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF06302244F5D500B44C8D /* RedditTableViewCell.swift */; };
 		8BBF06332244FA7B00B44C8D /* RedditCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF06322244FA7B00B44C8D /* RedditCellViewModel.swift */; };
 		8BBF0664224529BE00B44C8D /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF0663224529BE00B44C8D /* UIImageViewExtension.swift */; };
+		8BBF06662248EA7800B44C8D /* ViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF06652248EA7800B44C8D /* ViewControllerExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		8BBF06302244F5D500B44C8D /* RedditTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditTableViewCell.swift; sourceTree = "<group>"; };
 		8BBF06322244FA7B00B44C8D /* RedditCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditCellViewModel.swift; sourceTree = "<group>"; };
 		8BBF0663224529BE00B44C8D /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		8BBF06652248EA7800B44C8D /* ViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				8BBF0663224529BE00B44C8D /* UIImageViewExtension.swift */,
+				8BBF06652248EA7800B44C8D /* ViewControllerExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				8B807E0F2243B6E7001C1A16 /* RedditApiConnector.swift in Sources */,
 				8B807E0B2243B6AD001C1A16 /* RedditListViewModel.swift in Sources */,
 				8BBF0664224529BE00B44C8D /* UIImageViewExtension.swift in Sources */,
+				8BBF06662248EA7800B44C8D /* ViewControllerExtensions.swift in Sources */,
 				8B807E0D2243B6CE001C1A16 /* RedditDetailViewModel.swift in Sources */,
 				8BBF06312244F5D500B44C8D /* RedditTableViewCell.swift in Sources */,
 				8B807E132243B74B001C1A16 /* RedditQueryObject.swift in Sources */,

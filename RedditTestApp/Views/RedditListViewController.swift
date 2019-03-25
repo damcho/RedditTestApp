@@ -40,16 +40,19 @@ class RedditListViewController: UITableViewController {
     }
     
     func setupViewModel() {
-        let completionSuccess = { (reddits:RedditsContainer? ) -> () in
-            self.tableView.reloadData()
-            self.refreshControl?.endRefreshing()
+        viewModel.redditsFetchedWithSuccess = { (reddits:RedditsContainer? ) -> () in
+                self.tableView.reloadData()
+                self.refreshControl?.endRefreshing()
+        }
+
+        viewModel.redditsFetchedWithFailed = { ( error:RedditApiError ) -> () in
+                self.showAlertView(msg: error.localizedDescription)
+                print(error.localizedDescription)
         }
         
-        viewModel.redditsFetchedWithSuccess = completionSuccess
-        let completionFailure = { ( error:RedditApiError? ) -> () in
-            print(error?.localizedDescription)
+        viewModel.redditRemovedAtIndex = {(index) -> () in
+            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
         }
-        viewModel.redditsFetchedWithFailed = completionFailure
     }
 
     override func viewWillAppear(_ animated: Bool) {

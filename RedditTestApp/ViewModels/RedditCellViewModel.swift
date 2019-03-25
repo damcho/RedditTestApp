@@ -18,6 +18,8 @@ class RedditCellViewModel {
     var comments:String
     var readState:Bool
     
+    var dismissCellAction:((RedditCellViewModel) ->())?
+    
     init(redditModel:RedditModel) {
         self.redditModel = redditModel
         self.title = redditModel.title
@@ -39,4 +41,10 @@ class RedditCellViewModel {
         UIImage.downloaded(from: imageUrl, completionHandler: imageHandler)
         return self.redditImage
     }
+    
+    func dismissCellTapped() {
+        self.dismissCellAction?(self)
+    }
+    
+    
 }

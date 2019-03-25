@@ -9,8 +9,11 @@
 import Foundation
 
 
-class RedditModel {
+class RedditModel:Equatable {
+  
     
+    
+    let id:String
     let title:String
     let author:String
     let dateCreated:Date
@@ -21,6 +24,10 @@ class RedditModel {
     
     init?(data:Dictionary<String, Any>) {
         print("creo modelo")
+        guard let id = data["id"] as? String else {
+            return nil
+        }
+        self.id = id
         guard let title = data["title"] as? String else {
             return nil
         }
@@ -47,6 +54,10 @@ class RedditModel {
         self.dateCreated = Date(timeIntervalSince1970: Double(dateCreated))
         print(self.dateCreated)
         
+    }
+    
+    static func == (lhs: RedditModel, rhs: RedditModel) -> Bool {
+        return lhs.id == rhs.id
     }
     
 }

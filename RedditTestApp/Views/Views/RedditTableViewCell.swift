@@ -16,7 +16,7 @@ class RedditTableViewCell: UITableViewCell {
     @IBOutlet weak var redditThumbImageView: UIImageView!
     @IBOutlet weak var redditAuthorNameLabel: UILabel!
     @IBOutlet weak var redditTitleLabel: UILabel!
-    
+  
     var viewModel:RedditCellViewModel? {
         didSet {
             redditTitleLabel.text = viewModel?.title
@@ -26,14 +26,12 @@ class RedditTableViewCell: UITableViewCell {
             })
             numberOfCommentsLabel.text = viewModel?.comments
             unreadStatusView.backgroundColor = viewModel?.readState == false ? UIColor.blue : UIColor.clear
-
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.unreadStatusView.layer.cornerRadius = 7.5
-
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -43,7 +41,10 @@ class RedditTableViewCell: UITableViewCell {
             viewModel?.readState = true
         }
         unreadStatusView.backgroundColor = viewModel?.readState == false ? UIColor.blue : UIColor.clear
-        // Configure the view for the selected state
+    }
+    
+    @IBAction func dismissCellTapped(_ sender: Any) {
+        self.viewModel?.dismissCellTapped()
     }
 
 }
