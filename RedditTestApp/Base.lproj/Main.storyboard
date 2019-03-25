@@ -30,7 +30,7 @@
             </objects>
             <point key="canvasLocation" x="-38" y="-630"/>
         </scene>
-        <!--Reddit List View Controller-->
+        <!--Reddit Posts-->
         <scene sceneID="gyr-V3-z7u">
             <objects>
                 <viewController id="aXV-pM-APT" customClass="RedditListViewController" customModule="RedditTestApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -179,7 +179,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oi9-Pw-Zcn"/>
                     </view>
-                    <navigationItem key="navigationItem" id="3IL-4V-Vfd"/>
+                    <navigationItem key="navigationItem" title="Reddit Posts" id="3IL-4V-Vfd"/>
                     <connections>
                         <outlet property="redditsTableView" destination="8kK-5o-TmZ" id="neh-6t-4LN"/>
                     </connections>
@@ -197,7 +197,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ai9-Yh-yDJ">
-                                <rect key="frame" x="52" y="84" width="271" height="20.5"/>
+                                <rect key="frame" x="166.5" y="84" width="42" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20.5" id="sGd-tI-zAQ"/>
                                 </constraints>
@@ -221,7 +221,6 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="ai9-Yh-yDJ" secondAttribute="trailing" constant="52" id="4zz-tu-FPr"/>
                             <constraint firstItem="gxM-FF-2nb" firstAttribute="centerX" secondItem="VUw-jc-0yf" secondAttribute="centerX" id="55Q-7g-hCt"/>
                             <constraint firstItem="sZO-Kv-nUh" firstAttribute="top" secondItem="gxM-FF-2nb" secondAttribute="bottom" constant="10" id="BGU-WE-b5v"/>
                             <constraint firstItem="sZO-Kv-nUh" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="57" id="Hw4-8C-hiS"/>
@@ -229,7 +228,6 @@
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="sZO-Kv-nUh" secondAttribute="bottom" constant="10" id="OQl-vp-Ef2"/>
                             <constraint firstItem="gxM-FF-2nb" firstAttribute="top" secondItem="ai9-Yh-yDJ" secondAttribute="bottom" constant="17.5" id="PMW-7m-tje"/>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="sZO-Kv-nUh" secondAttribute="trailing" constant="57" id="Rk4-Fz-De3"/>
-                            <constraint firstItem="ai9-Yh-yDJ" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="52" id="WQA-KA-Nfn"/>
                             <constraint firstItem="ai9-Yh-yDJ" firstAttribute="centerX" secondItem="VUw-jc-0yf" secondAttribute="centerX" id="hOH-D0-X0E"/>
                             <constraint firstItem="sZO-Kv-nUh" firstAttribute="centerX" secondItem="VUw-jc-0yf" secondAttribute="centerX" id="uPS-cD-4HZ"/>
                         </constraints>

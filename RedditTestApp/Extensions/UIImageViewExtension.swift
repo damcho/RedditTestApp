@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 extension UIImage {
+    
     static func downloaded(from url: URL, completionHandler: @escaping (UIImage?) -> ()) {
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard

@@ -30,7 +30,7 @@ class RedditDetailViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-    
+        self.setupDetaiView()
         super.viewWillAppear(animated)
     }
 }
