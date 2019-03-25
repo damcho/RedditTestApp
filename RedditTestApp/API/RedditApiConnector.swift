@@ -54,7 +54,7 @@ class RedditApiConnector {
             }
             if  error != nil {
                 DispatchQueue.main.async {
-                    completionHandler(nil, .MALFORMED_DATA)
+                    completionHandler(nil, .NO_CONNECTION)
                 }
             } else if let data = data,
                 let response = response as? HTTPURLResponse,
