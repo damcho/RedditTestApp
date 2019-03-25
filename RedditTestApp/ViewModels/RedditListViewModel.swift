@@ -32,11 +32,11 @@ class RedditListViewModel {
     func getTopReddits(queryObj:RedditQueryObject) {
         
         let completionHandler = {[unowned self] (redditsContainer:RedditsContainer?, error:RedditApiError?) -> () in
-            if redditsContainer != nil {
+            if let redditsContainer = redditsContainer {
                 if self.redditsContainer == nil {
                     self.redditsContainer = redditsContainer
                 } else {
-                    self.redditsContainer?.update(container: redditsContainer!)
+                    self.redditsContainer?.update(container: redditsContainer)
                 }
                 self.redditsContainer?.redditremovedAction = {[unowned self] (index) ->() in
                     self.redditRemovedAtIndex?(index)
