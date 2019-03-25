@@ -8,9 +8,8 @@
 
 import Foundation
 import UIKit
-class RedditCellViewModel {
+class RedditCellViewModel:RedditBaseViewModel {
     
-    var redditModel:RedditModel?
     
     var title:String
     var author:String
@@ -20,8 +19,7 @@ class RedditCellViewModel {
     var redditPostTime:String
     var dismissCellAction:((RedditCellViewModel) ->())?
     
-    init(redditModel:RedditModel) {
-        self.redditModel = redditModel
+    override init(redditModel:RedditModel) {
         self.title = redditModel.title
         self.author = redditModel.author
         self.redditImage = UIImage(named: "defaultRedditImage")!
@@ -29,19 +27,7 @@ class RedditCellViewModel {
         self.readState = false
         let hoursAgo = Calendar.current.dateComponents([.hour], from: redditModel.dateCreated, to: Date()).hour ?? 0
         self.redditPostTime = "\(hoursAgo) hours ago"
-    }
-    
-    func getImage(handler: @escaping (UIImage) -> ()) -> UIImage {
-        guard let imageUrl =  self.redditModel?.thumbnailUrl else {
-            return self.redditImage
-        }
-        let imageHandler = {(image:UIImage?) -> () in
-            if image != nil {
-                handler(image!)
-            }
-        }
-        UIImage.downloaded(from: imageUrl, completionHandler: imageHandler)
-        return self.redditImage
+        super.init(redditModel: redditModel)
     }
     
     func dismissCellTapped() {

@@ -15,21 +15,23 @@ class RedditDetailViewController: UIViewController {
     @IBOutlet weak var redditTitleLabel: UILabel!
     var viewModel:RedditDetailViewModel? {
         didSet {
-            if redditTitleLabel != nil {
-                redditTitleLabel.text = viewModel?.title
-            }
+            self.setupDetaiView()
         }
     }
     
-
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        redditTitleLabel.text = viewModel?.title
-
+    func setupDetaiView() {
+        if redditTitleLabel != nil {
+            redditTitleLabel.text = viewModel?.title
+            redditAuthorLabel.text = viewModel?.author
+        }
+        self.viewModel?.getImage(handler: {[weak self] (image) in
+            self?.redditThumbImageView.image = image
+        })
     }
-
-
-   
+    
+    override func viewWillAppear(_ animated: Bool) {
+    
+        super.viewWillAppear(animated)
+    }
 }
 

@@ -22,7 +22,7 @@ class RedditTableViewCell: UITableViewCell {
         didSet {
             redditTitleLabel.text = viewModel?.title
             redditAuthorNameLabel.text = viewModel?.author
-            redditThumbImageView.image =  viewModel?.getImage(handler: { [weak self] (image) -> ()  in
+            viewModel?.getImage(handler: { [weak self] (image) -> ()  in
                 self?.redditThumbImageView.image = image
             })
             numberOfCommentsLabel.text = viewModel?.comments
@@ -33,6 +33,7 @@ class RedditTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.redditThumbImageView.image = UIImage(named: "defaultRedditImage")
         self.unreadStatusView.layer.cornerRadius = 7.5
     }
 

@@ -54,7 +54,7 @@ class RedditListViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         
         viewModel.redditRemovedAtIndex = { [weak self] (index) -> () in
-            self?.redditsTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+            self?.redditsTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .left)
         }
     }
     

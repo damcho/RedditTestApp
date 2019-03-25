@@ -7,16 +7,17 @@
 //
 
 import Foundation
+import UIKit
 
-class RedditDetailViewModel {
-    
-    var redditModel:RedditModel?
+class RedditDetailViewModel:RedditBaseViewModel {
     
     var title:String
-    
-    init(redditModel:RedditModel) {
-        self.redditModel = redditModel
+    var author:String
+    var detailImage:UIImage?
+
+    override init(redditModel:RedditModel) {
         self.title = redditModel.title
+        self.author = redditModel.author
+        super.init(redditModel: redditModel)
     }
-    
 }
