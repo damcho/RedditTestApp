@@ -9,7 +9,7 @@
 import UIKit
 
 class RedditListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     var detailViewController: RedditDetailViewController? = nil
     let viewModel = RedditListViewModel()
     var queryObj = RedditQueryObject()
@@ -38,40 +38,31 @@ class RedditListViewController: UIViewController, UITableViewDelegate, UITableVi
         self.viewModel.removeAllReddits()
     }
     
-    @objc
-    func refreshReddits() {
+    @objc func refreshReddits() {
         self.queryObj.after = nil
         viewModel.getTopReddits(queryObj:queryObj )
     }
     
     func setupViewModel() {
-        viewModel.redditsFetchedWithSuccess = { () -> () in
-                self.redditsTableView.reloadData()
-                self.redditsTableView.refreshControl?.endRefreshing()
-        }
-
-        viewModel.redditsFetchedWithFailed = { ( error:RedditApiError ) -> () in
-                self.showAlertView(msg: error.localizedDescription)
-                print(error.localizedDescription)
+        viewModel.redditsFetchedWithSuccess = {[weak self] () -> () in
+            self?.redditsTableView.reloadData()
+            self?.redditsTableView.refreshControl?.endRefreshing()
         }
         
-        viewModel.redditRemovedAtIndex = {(index) -> () in
-            self.redditsTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+        viewModel.redditsFetchedWithFailed = { [weak self] ( error:RedditApiError ) -> () in
+            self?.showAlertView(msg: error.localizedDescription)
+        }
+        
+        viewModel.redditRemovedAtIndex = { [weak self] (index) -> () in
+            self?.redditsTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
         }
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        self.redditsTableView.reloadData()
-        super.viewWillAppear(animated)
-    }
-
+    
     // MARK: - Table View
-
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.viewModel.redditsCount()
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let redditCell = tableView.dequeueReusableCell(withIdentifier: "redditcell", for: indexPath) as! RedditTableViewCell
         redditCell.viewModel = self.viewModel.getRedditCellViewModelAt(index: indexPath.row)
@@ -83,13 +74,13 @@ class RedditListViewController: UIViewController, UITableViewDelegate, UITableVi
             guard let celLViewModel = self.viewModel.getRedditCellViewModelAt(index: indexPath.row) else {
                 return
             }
-
+            
             detailViewController?.viewModel = RedditDetailViewModel(redditModel:celLViewModel.redditModel!)
             let detailNavigationController = detailViewController?.navigationController
-
+            
             splitViewController?.showDetailViewController(detailNavigationController!, sender: nil)
         }
     }
-
+    
 }
 

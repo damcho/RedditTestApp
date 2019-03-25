@@ -17,7 +17,7 @@ class RedditCellViewModel {
     var redditImage:UIImage
     var comments:String
     var readState:Bool
-    
+    var redditPostTime:String
     var dismissCellAction:((RedditCellViewModel) ->())?
     
     init(redditModel:RedditModel) {
@@ -27,6 +27,8 @@ class RedditCellViewModel {
         self.redditImage = UIImage(named: "defaultRedditImage")!
         self.comments = "\(redditModel.numberOfComments) comments"
         self.readState = false
+        let hoursAgo = Calendar.current.dateComponents([.hour], from: redditModel.dateCreated, to: Date()).hour ?? 0
+        self.redditPostTime = "\(hoursAgo) hours ago"
     }
     
     func getImage(handler: @escaping (UIImage) -> ()) -> UIImage {

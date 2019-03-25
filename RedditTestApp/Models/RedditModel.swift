@@ -19,7 +19,6 @@ class RedditModel:Equatable {
     let dateCreated:Date
     let thumbnailUrl:URL?
     let numberOfComments:Int
- //   let unreadStatus:Bool
     
     
     init?(data:Dictionary<String, Any>) {

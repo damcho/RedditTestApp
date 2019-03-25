@@ -10,6 +10,7 @@ import UIKit
 
 class RedditTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var redditPostTimeLabel: UILabel!
     @IBOutlet weak var unreadStatusView: UIView!
     @IBOutlet weak var numberOfCommentsLabel: UILabel!
     @IBOutlet weak var dismissRedditButton: UIButton!
@@ -26,6 +27,7 @@ class RedditTableViewCell: UITableViewCell {
             })
             numberOfCommentsLabel.text = viewModel?.comments
             unreadStatusView.backgroundColor = viewModel?.readState == false ? UIColor.blue : UIColor.clear
+            redditPostTimeLabel.text = viewModel?.redditPostTime
         }
     }
     
