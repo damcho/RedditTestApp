@@ -11,8 +11,6 @@ import Foundation
 
 class RedditModel:Equatable {
   
-    
-    
     let id:String
     let title:String
     let author:String
@@ -20,9 +18,7 @@ class RedditModel:Equatable {
     let thumbnailUrl:URL?
     let numberOfComments:Int
     
-    
     init?(data:Dictionary<String, Any>) {
-        print("creo modelo")
         guard let id = data["id"] as? String else {
             return nil
         }
@@ -51,8 +47,6 @@ class RedditModel:Equatable {
             return nil
         }
         self.dateCreated = Date(timeIntervalSince1970: Double(dateCreated))
-        print(self.dateCreated)
-        
     }
     
     static func == (lhs: RedditModel, rhs: RedditModel) -> Bool {

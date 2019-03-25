@@ -144,6 +144,7 @@
                                 <connections>
                                     <outlet property="dataSource" destination="aXV-pM-APT" id="T70-x5-8jD"/>
                                     <outlet property="delegate" destination="aXV-pM-APT" id="kaw-ZL-0Oa"/>
+                                    <outlet property="prefetchDataSource" destination="aXV-pM-APT" id="bj3-Hb-TFd"/>
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="awJ-a3-14C">

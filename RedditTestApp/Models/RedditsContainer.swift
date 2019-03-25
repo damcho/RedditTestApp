@@ -40,4 +40,9 @@ class RedditsContainer {
     func getRedditAt(index:Int) -> RedditCellViewModel? {
         return index < self.redditsArray.count ? self.redditsArray[index] : nil
     }
+    
+    func update(container:RedditsContainer) {
+        self.after = container.after
+        self.redditsArray.append(contentsOf: container.redditsArray)
+    }
 }

@@ -25,7 +25,7 @@ class RedditApiConnector {
     
     public func fetchReddits( queryObject:RedditQueryObject,completionHandler: @escaping QueryResut) {
         
-        guard let url = createURL(queryItems: nil) else {
+        guard let url = createURL(queryItems: queryObject.queryItems()) else {
             return
         }
         self.performRequest(url: url, completionHandler: completionHandler)
@@ -41,6 +41,7 @@ class RedditApiConnector {
         }
         
         guard let url = urlComponents.url else { return nil }
+        print(url)
         return url
     }
     

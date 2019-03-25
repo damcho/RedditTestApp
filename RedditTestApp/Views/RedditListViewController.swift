@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RedditListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class RedditListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     
     var detailViewController: RedditDetailViewController? = nil
     let viewModel = RedditListViewModel()
@@ -59,6 +59,15 @@ class RedditListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     // MARK: - Table View
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        for index in indexPaths {
+            if index.row >= self.viewModel.redditsCount() - 1{
+                viewModel.getTopReddits(queryObj:queryObj )
+                return
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.viewModel.redditsCount()
     }

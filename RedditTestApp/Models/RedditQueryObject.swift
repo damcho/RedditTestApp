@@ -12,4 +12,14 @@ class RedditQueryObject {
     
     var after:String?
     
+    func queryItems() -> [URLQueryItem] {
+        var queryItems:[URLQueryItem] = []
+        if after != nil {
+            queryItems.append(URLQueryItem(name: "after", value: self.after))
+        }
+        queryItems.append(URLQueryItem(name: "limit", value: "50"))
+
+        return queryItems
+    }
+    
 }

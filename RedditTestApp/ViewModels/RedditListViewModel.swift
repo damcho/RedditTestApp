@@ -33,11 +33,15 @@ class RedditListViewModel {
         
         let completionHandler = {[unowned self] (redditsContainer:RedditsContainer?, error:RedditApiError?) -> () in
             if redditsContainer != nil {
-                self.redditsContainer = redditsContainer
-
-                self.redditsContainer?.redditremovedAction = {(index) ->() in
+                if self.redditsContainer == nil {
+                    self.redditsContainer = redditsContainer
+                } else {
+                    self.redditsContainer?.update(container: redditsContainer!)
+                }
+                self.redditsContainer?.redditremovedAction = {[unowned self] (index) ->() in
                     self.redditRemovedAtIndex?(index)
                 }
+                
                 self.redditsFetchedWithSuccess?()
             } else {
                 switch error! {
@@ -49,6 +53,9 @@ class RedditListViewModel {
             }
         }
         
+        if self.redditsContainer != nil {
+            queryObj.after = self.redditsContainer?.after
+        }
         apiConnector.fetchReddits(queryObject: queryObj, completionHandler: completionHandler)
     }
     
