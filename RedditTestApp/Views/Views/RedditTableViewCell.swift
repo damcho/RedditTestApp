@@ -25,22 +25,24 @@ class RedditTableViewCell: UITableViewCell {
                 self?.redditThumbImageView.image = image
             })
             numberOfCommentsLabel.text = viewModel?.comments
+            unreadStatusView.backgroundColor = viewModel?.readState == false ? UIColor.blue : UIColor.clear
+
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.unreadStatusView.layer.cornerRadius = 10
+        self.unreadStatusView.layer.cornerRadius = 7.5
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        unreadStatusView.backgroundColor = viewModel?.readState == false ? UIColor.blue : UIColor.clear
 
         if selected {
             viewModel?.readState = true
         }
-
+        unreadStatusView.backgroundColor = viewModel?.readState == false ? UIColor.blue : UIColor.clear
         // Configure the view for the selected state
     }
 

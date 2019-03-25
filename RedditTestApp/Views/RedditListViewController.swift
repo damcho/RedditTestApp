@@ -12,13 +12,19 @@ class RedditListViewController: UITableViewController {
 
     var detailViewController: RedditDetailViewController? = nil
     let viewModel = RedditListViewModel()
-
+    var queryObj = RedditQueryObject()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setupView()
         self.setupViewModel()
-        viewModel.getTopReddits(queryObj: RedditQueryObject())
-
+        self.refreshReddits()
+    }
+    
+    func setupView() {
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.addTarget(self, action: #selector(refreshReddits), for: .valueChanged)
+        
         if let split = splitViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? RedditDetailViewController
@@ -27,9 +33,16 @@ class RedditListViewController: UITableViewController {
         }
     }
     
+    @objc
+    func refreshReddits() {
+        self.queryObj.after = nil
+        viewModel.getTopReddits(queryObj:queryObj )
+    }
+    
     func setupViewModel() {
         let completionSuccess = { (reddits:RedditsContainer? ) -> () in
             self.tableView.reloadData()
+            self.refreshControl?.endRefreshing()
         }
         
         viewModel.redditsFetchedWithSuccess = completionSuccess
@@ -41,6 +54,7 @@ class RedditListViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+        self.tableView.reloadData()
         super.viewWillAppear(animated)
     }
 
@@ -73,8 +87,6 @@ class RedditListViewController: UITableViewController {
 
             splitViewController?.showDetailViewController(detailNavigationController!, sender: nil)
         }
-
-        
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

@@ -10,5 +10,6 @@ import Foundation
 
 class RedditQueryObject {
     
+    var after:String?
     
 }
