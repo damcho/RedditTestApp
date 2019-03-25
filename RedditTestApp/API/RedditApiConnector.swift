@@ -22,8 +22,6 @@ class RedditApiConnector {
     let path = "/r/popular/top.json"
     let defaultSession =  URLSession(configuration: .default)
     typealias QueryResut = (RedditsContainer?, RedditApiError?) -> ()
-    var dataTask: URLSessionDataTask?
-    
     
     public func fetchReddits( queryObject:RedditQueryObject,completionHandler: @escaping QueryResut) {
         
@@ -48,10 +46,8 @@ class RedditApiConnector {
     
     private func performRequest(url: URL, completionHandler: @escaping  QueryResut){
         
-        dataTask = defaultSession.dataTask(with: url) { data, response, error in
-            defer {
-                self.dataTask = nil
-            }
+        let dataTask = defaultSession.dataTask(with: url) { data, response, error in
+        
             if  error != nil {
                 DispatchQueue.main.async {
                     completionHandler(nil, .NO_CONNECTION)
@@ -87,19 +83,14 @@ class RedditApiConnector {
                         completionHandler(redditContainer, nil)
                     }
                     
-                } catch let error as NSError {
-                    print(error.localizedDescription)
+                } catch {
+                    DispatchQueue.main.async {
+                        completionHandler(nil, .MALFORMED_DATA )
+                    }
                 }
             }
         }
-        dataTask?.resume()
+        dataTask.resume()
     }
-    
-    
-  
-    
-    
-
-    
 }
 
