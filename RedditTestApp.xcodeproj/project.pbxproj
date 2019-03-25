@@ -25,6 +25,7 @@
 		8BBF0664224529BE00B44C8D /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF0663224529BE00B44C8D /* UIImageViewExtension.swift */; };
 		8BBF06662248EA7800B44C8D /* ViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF06652248EA7800B44C8D /* ViewControllerExtensions.swift */; };
 		8BBF0668224925D600B44C8D /* RedditBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF0667224925D600B44C8D /* RedditBaseViewModel.swift */; };
+		8BBF066A224976CE00B44C8D /* README in Resources */ = {isa = PBXBuildFile; fileRef = 8BBF0669224976CE00B44C8D /* README */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		8BBF0663224529BE00B44C8D /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		8BBF06652248EA7800B44C8D /* ViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtensions.swift; sourceTree = "<group>"; };
 		8BBF0667224925D600B44C8D /* RedditBaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditBaseViewModel.swift; sourceTree = "<group>"; };
+		8BBF0669224976CE00B44C8D /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 				8BBF062F2244F59500B44C8D /* Views */,
 				8B807E062243B606001C1A16 /* RedditDetailViewController.swift */,
 				8B807E072243B606001C1A16 /* RedditListViewController.swift */,
+				8BBF0669224976CE00B44C8D /* README */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BBF066A224976CE00B44C8D /* README in Resources */,
 				8B807DED2242B86E001C1A16 /* LaunchScreen.storyboard in Resources */,
 				8B807DEA2242B86E001C1A16 /* Assets.xcassets in Resources */,
 				8B807DE82242B86C001C1A16 /* Main.storyboard in Resources */,

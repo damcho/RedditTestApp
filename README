@@ -1,0 +1,28 @@
+Reddit posts app
+
+arquitecture MVVM
+
+app structure:
+RedditApiConnector: class to connect with the reddit api and retrieve posts. uses singleton pattern to instantiate connector
+
+RedditsListViewModel, RedditsDetailViewModel, RedditsCellViewModel:
+Viewmodels for each view controller
+
+Views folder:
+Contains view controllers and views
+
+Models:
+Contains all model objects
+
+
+supports iPhone and iPad
+
+things to improve or implement:
+- error handling
+- UI in general( activity indicator, animations )
+- app state preservation / restoration
+- save pictures to gallery
+
+How to install:
+-clone or download
+-open RedditTestApp.project
