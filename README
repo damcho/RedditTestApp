@@ -22,11 +22,11 @@ supports iPhone and iPad
 
 things to improve or implement:
 - Router for handling app navigation
-- API error handling
+- Unit testing
+- improve API error handling
 - UI in general( activity indicator, animations, alerts )
 - app state preservation / restoration
 - save pictures to gallery
-- Memory leak in RedditsContainer
 
 How to install:
 -clone or download

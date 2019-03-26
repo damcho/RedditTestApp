@@ -25,11 +25,12 @@ class RedditsContainer {
                 if let redditModel = RedditModel(data:redditData ) {
                     let redditCellViewModel = RedditCellViewModel(redditModel: redditModel)
                     
-                    redditCellViewModel.dismissCellAction = {[unowned self] (redditCellViewModel) -> () in
-                        let index = self.redditsArray.firstIndex(where: {$0 === redditCellViewModel})
-                        self.redditsArray.remove(at: index!)
-                        self.redditremovedAction?(index!)
+                    redditCellViewModel.dismissCellAction = {[weak self] (redditCellViewModel) -> () in
+                        let index = self?.redditsArray.firstIndex(where: {$0 === redditCellViewModel})
+                        self?.redditsArray.remove(at: index!)
+                        self?.redditremovedAction?(index!)
                     }
+ 
                     redditCellViewModelsArray.append(redditCellViewModel)
                 }
             }
