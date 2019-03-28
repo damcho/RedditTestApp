@@ -14,14 +14,13 @@ enum RedditApiError : Error {
     case NO_CONNECTION
 }
 
-class RedditApiConnector {
+class RedditApiConnector :ApiConnector{
     
     static let shared = RedditApiConnector()
     let scheme = "https"
     let host = "www.reddit.com"
     let path = "/r/popular/top.json"
     let defaultSession =  URLSession(configuration: .default)
-    typealias QueryResut = (RedditsContainer?, RedditApiError?) -> ()
     
     public func fetchReddits( queryObject:RedditQueryObject,completionHandler: @escaping QueryResut) {
         

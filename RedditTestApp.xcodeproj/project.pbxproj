@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B1BF83F224D8A0C0007F593 /* ApiConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BF83E224D8A0C0007F593 /* ApiConnector.swift */; };
 		8B807DE12242B86C001C1A16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B807DE02242B86C001C1A16 /* AppDelegate.swift */; };
 		8B807DE82242B86C001C1A16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B807DE62242B86C001C1A16 /* Main.storyboard */; };
 		8B807DEA2242B86E001C1A16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B807DE92242B86E001C1A16 /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8B1BF83E224D8A0C0007F593 /* ApiConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiConnector.swift; sourceTree = "<group>"; };
 		8B807DDD2242B86C001C1A16 /* RedditTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RedditTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B807DE02242B86C001C1A16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B807DE72242B86C001C1A16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -80,6 +82,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B1BF83D224D89F20007F593 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				8B1BF83E224D8A0C0007F593 /* ApiConnector.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		8B807DD42242B86B001C1A16 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +111,7 @@
 		8B807DDF2242B86C001C1A16 /* RedditTestApp */ = {
 			isa = PBXGroup;
 			children = (
+				8B1BF83D224D89F20007F593 /* Protocols */,
 				8BBF06622245299900B44C8D /* Extensions */,
 				8B807E052243B579001C1A16 /* Views */,
 				8B807E042243B56C001C1A16 /* ViewModels */,
@@ -288,6 +299,7 @@
 				8B807E0D2243B6CE001C1A16 /* RedditDetailViewModel.swift in Sources */,
 				8BBF06312244F5D500B44C8D /* RedditTableViewCell.swift in Sources */,
 				8B807E132243B74B001C1A16 /* RedditQueryObject.swift in Sources */,
+				8B1BF83F224D8A0C0007F593 /* ApiConnector.swift in Sources */,
 				8B807DE12242B86C001C1A16 /* AppDelegate.swift in Sources */,
 				8B807E112243B72C001C1A16 /* RedditModel.swift in Sources */,
 				8BBF06332244FA7B00B44C8D /* RedditCellViewModel.swift in Sources */,

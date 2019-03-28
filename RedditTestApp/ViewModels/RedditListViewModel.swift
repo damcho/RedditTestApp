@@ -13,8 +13,16 @@ class RedditListViewModel {
     var redditsFetchedWithSuccess: (() -> ())?
     var redditsFetchedWithFailed: ((RedditApiError) -> ())?
     var redditRemovedAtIndex:((Int) -> ())?
-    let apiConnector = RedditApiConnector.shared
-    var redditsContainer: RedditsContainer = RedditsContainer()
+    private let apiConnector:ApiConnector
+    private var redditsContainer: RedditsContainer
+    
+    init() {
+        self.apiConnector = RedditApiConnector.shared
+        self.redditsContainer = RedditsContainer()
+        self.redditsContainer.redditremovedAction = {[unowned self] (index) ->() in
+            self.redditRemovedAtIndex?(index)
+        }
+    }
     
     func getRedditCellViewModelAt(index:Int) -> RedditCellViewModel? {
         return self.redditsContainer.getRedditAt(index:index)
@@ -35,11 +43,7 @@ class RedditListViewModel {
 
                 self.redditsContainer.update(container: redditsContainer)
                 queryObj.after = self.redditsContainer.after
-
-                self.redditsContainer.redditremovedAction = {[unowned self] (index) ->() in
-                    self.redditRemovedAtIndex?(index)
-                }
-                
+              
                 self.redditsFetchedWithSuccess?()
             } else {
                 switch error! {
@@ -60,5 +64,4 @@ class RedditListViewModel {
         self.redditsContainer.refresh()
         self.redditsFetchedWithSuccess?()
     }
-    
 }
