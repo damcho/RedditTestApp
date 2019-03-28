@@ -24,6 +24,7 @@ class RedditBaseViewModel {
             return
         }
         guard let imageUrl =  self.redditModel?.thumbnailUrl else {
+            handler(UIImage(named: "defaultRedditImage")!)
             return
         }
         let imageHandler = {[unowned self] (image:UIImage?) -> () in
