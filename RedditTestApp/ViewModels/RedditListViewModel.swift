@@ -10,35 +10,33 @@ import Foundation
 
 class RedditListViewModel {
     
-    
     var redditsFetchedWithSuccess: (() -> ())?
     var redditsFetchedWithFailed: ((RedditApiError) -> ())?
     var redditRemovedAtIndex:((Int) -> ())?
     let apiConnector = RedditApiConnector.shared
-    var redditsContainer:RedditsContainer?
+    var redditsContainer: RedditsContainer = RedditsContainer()
     
     func getRedditCellViewModelAt(index:Int) -> RedditCellViewModel? {
-        return self.redditsContainer != nil ? self.redditsContainer!.getRedditAt(index:index) : nil
+        return self.redditsContainer.getRedditAt(index:index)
     }
     
     func getReddits() -> [RedditCellViewModel]{
-        return self.redditsContainer != nil ? self.redditsContainer!.redditsArray : []
+        return self.redditsContainer.redditsArray
     }
     
     func redditsCount() -> Int {
-        return self.redditsContainer?.redditsArray != nil ? self.redditsContainer!.redditsArray.count : 0
+       return self.redditsContainer.redditsArray.count
     }
     
     func getTopReddits(queryObj:RedditQueryObject) {
         
         let completionHandler = {[unowned self] (redditsContainer:RedditsContainer?, error:RedditApiError?) -> () in
             if let redditsContainer = redditsContainer {
-                if self.redditsContainer == nil {
-                    self.redditsContainer = redditsContainer
-                } else {
-                    self.redditsContainer?.update(container: redditsContainer)
-                }
-                self.redditsContainer?.redditremovedAction = {[unowned self] (index) ->() in
+
+                self.redditsContainer.update(container: redditsContainer)
+                queryObj.after = self.redditsContainer.after
+
+                self.redditsContainer.redditremovedAction = {[unowned self] (index) ->() in
                     self.redditRemovedAtIndex?(index)
                 }
                 
@@ -52,15 +50,14 @@ class RedditListViewModel {
                 }
             }
         }
-        
-        if self.redditsContainer != nil {
-            queryObj.after = self.redditsContainer?.after
+        if queryObj.after == nil {
+            self.redditsContainer.refresh()
         }
         apiConnector.fetchReddits(queryObject: queryObj, completionHandler: completionHandler)
     }
     
     func removeAllReddits() {
-        self.redditsContainer?.redditsArray = []
+        self.redditsContainer.refresh()
         self.redditsFetchedWithSuccess?()
     }
     

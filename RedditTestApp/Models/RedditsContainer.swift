@@ -14,6 +14,10 @@ class RedditsContainer {
     var after:String?
     var redditremovedAction:((Int) -> ())?
     
+    init() {
+        
+    }
+    
     init?(data:Array<Dictionary<String, Any>>) {
         self.createRedditCellModels(dataArray: data)
     }
@@ -24,13 +28,6 @@ class RedditsContainer {
             if let redditData = redditDictionary["data"] as? Dictionary<String, Any> {
                 if let redditModel = RedditModel(data:redditData ) {
                     let redditCellViewModel = RedditCellViewModel(redditModel: redditModel)
-                    
-                    redditCellViewModel.dismissCellAction = {[weak self] (redditCellViewModel) -> () in
-                        let index = self?.redditsArray.firstIndex(where: {$0 === redditCellViewModel})
-                        self?.redditsArray.remove(at: index!)
-                        self?.redditremovedAction?(index!)
-                    }
- 
                     redditCellViewModelsArray.append(redditCellViewModel)
                 }
             }
@@ -42,8 +39,26 @@ class RedditsContainer {
         return index < self.redditsArray.count ? self.redditsArray[index] : nil
     }
     
+    func setDismissAction(redditsArray:[RedditCellViewModel]) {
+        let dismissCellAction =  {[weak self] (redditCellViewModel:RedditCellViewModel) -> () in
+            let index = self?.redditsArray.firstIndex(where: {$0 === redditCellViewModel})
+            self?.redditsArray.remove(at: index!)
+            self?.redditremovedAction?(index!)
+        }
+        
+        for redditCellModel in redditsArray {
+            redditCellModel.dismissCellAction = dismissCellAction
+        }
+    }
+    
     func update(container:RedditsContainer) {
         self.after = container.after
+        self.setDismissAction(redditsArray: container.redditsArray)
         self.redditsArray.append(contentsOf: container.redditsArray)
+    }
+    
+    func refresh() {
+        self.after = nil
+        self.redditsArray = []
     }
 }
