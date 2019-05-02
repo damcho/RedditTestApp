@@ -3,7 +3,7 @@
 ## Arquitecture MVVM
 
 ### App structure:
-####RedditApiConnector: class to connect with the reddit api and retrieve posts. uses singleton pattern to instantiate connector
+#### RedditApiConnector: class to connect with the reddit api and retrieve posts. uses singleton pattern to instantiate connector
 
 #### RedditsListViewModel, RedditsDetailViewModel, RedditsCellViewModel:
 #### Viewmodels for each view controller
@@ -28,6 +28,6 @@
 - app state preservation / restoration
 - save pictures to gallery
 
-##How to install:
+## How to install:
 - clone or download
 - open RedditTestApp.project
