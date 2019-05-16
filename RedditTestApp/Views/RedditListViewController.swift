@@ -20,11 +20,12 @@ class RedditListViewController: UIViewController, UITableViewDelegate, UITableVi
         self.setupView()
         self.setupViewModel()
         self.refreshReddits()
-        redditsTableView.estimatedRowHeight = 100
-        redditsTableView.rowHeight = UITableView.automaticDimension
     }
     
     func setupView() {
+        redditsTableView.isHidden = true
+        redditsTableView.estimatedRowHeight = 100
+        redditsTableView.rowHeight = UITableView.automaticDimension
         self.redditsTableView.refreshControl = UIRefreshControl()
         self.redditsTableView.refreshControl?.addTarget(self, action: #selector(refreshReddits), for: .valueChanged)
         
@@ -47,11 +48,13 @@ class RedditListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func setupViewModel() {
         viewModel.redditsFetchedWithSuccess = {[weak self] () -> () in
+            self?.redditsTableView.isHidden = false
             self?.redditsTableView.reloadData()
             self?.redditsTableView.refreshControl?.endRefreshing()
         }
         
         viewModel.redditsFetchedWithFailed = { [weak self] ( error:RedditApiError ) -> () in
+            self?.redditsTableView.isHidden = true
             self?.showAlertView(msg: error.localizedDescription)
         }
         
