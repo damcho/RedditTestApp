@@ -20,6 +20,8 @@ class RedditListViewController: UIViewController, UITableViewDelegate, UITableVi
         self.setupView()
         self.setupViewModel()
         self.refreshReddits()
+        redditsTableView.estimatedRowHeight = 100
+        redditsTableView.rowHeight = UITableView.automaticDimension
     }
     
     func setupView() {
