@@ -51,6 +51,7 @@ class RedditListViewController: UIViewController, UITableViewDelegate, UITableVi
             self?.redditsTableView.isHidden = false
             self?.redditsTableView.reloadData()
             self?.redditsTableView.refreshControl?.endRefreshing()
+            self?.view.layoutIfNeeded()
         }
         
         viewModel.redditsFetchedWithFailed = { [weak self] ( error:RedditApiError ) -> () in
@@ -66,7 +67,7 @@ class RedditListViewController: UIViewController, UITableViewDelegate, UITableVi
     // MARK: - Table View
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for index in indexPaths {
-            if index.row >= self.viewModel.redditsCount() - 1{
+            if index.row == self.viewModel.redditsCount() - 1{
                 viewModel.getTopReddits(queryObj:queryObj )
                 return
             }

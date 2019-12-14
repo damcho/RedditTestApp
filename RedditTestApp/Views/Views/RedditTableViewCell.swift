@@ -31,6 +31,16 @@ class RedditTableViewCell: UITableViewCell {
         }
     }
     
+    // MARK: - Reuse
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        redditTitleLabel.text = nil
+        redditAuthorNameLabel.text = nil
+        redditThumbImageView.image = UIImage(named: "defaultRedditImage")
+        numberOfCommentsLabel.text = nil
+        redditPostTimeLabel.text = nil
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.redditThumbImageView.image = UIImage(named: "defaultRedditImage")
